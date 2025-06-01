@@ -1,13 +1,83 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VUE3</title>
+    <!--VUE CDN-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!--STYLE-->
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
   
+  <div id="app">
+      <div class="cart">Cart:{{cart}}</div>
+        <div class="produc  t-display">
+          <div class="product-container">
+                <div class="product-image">
+                  <img :src="image" alt="img-product"> 
+                </div>   
+                    <div class="product-info">
+                      <h1>{{product_title}}</h1>
+                        <p v-if="inStock > 10">In Stock</p>
+                        <p v-else-if="inStock < 10 && inStock > 1">Almost of out</p>
+                        <p v-else>Out of Stock</p>
+                      <ul>
+                        <li v-for="detail in details">
+                          {{detail}}
+                        </li>
+                      </ul>
+                      <button v-for="variant in variants" :key="variant.id" 
+                      @mouseover="changeImage(variant.image)"
+                      @click="selectVariant(variant)" 
+                      class="variant-button"> {{variant.name}}
+                      </button>
+                      <button class="button" :class="{disabledButton : inStock < 1}" @click="addToCart" :disabled="inStock < 1">Add to Cart</button>
+                    </div>
+          </div>       
+        </div>
+      </div>
+  </div>
+  
+    <footer>
+      <span>
+        &copy:Killua Books, 2025 - Todos os direitos reservados.
+      </span>
+    </footer>
+
+  <script>
+    const { createApp, ref } = Vue
+      
+      createApp({
+        setup() {
+          const cart = ref(0);
+          const addToCart = () => {
+            cart.value +=1
+          }
+          const image = ref("assets/images/romance.jpg" );
+          const changeImage = (variantImage)=>{
+            image.value = variantImage
+          }
+
+          return {
+            product_title: ref("Killua Books"),
+            image,
+            inStock: ref(10),
+            variants: [{id: 1,name: 'Romance',image: "assets/images/romance.jpg",details: ['Romance - Autor A', 'Ano: 2020', 'Páginas: 300']},
+            {id: 2,name: 'Fantasia',image: "assets/images/fantasia.jpg",details: ['Fantasia - Autor B', 'Ano: 2018', 'Páginas: 450']},
+            {id: 3,name: 'Teologia',image: "assets/images/teologia.jpg",details: ['Teologia - Autor C', 'Ano: 2021', 'Páginas: 280']},
+            {id: 4,name: 'Educativo',image: "assets/images/educativo.jpg",details: ['Educativo - Autor D', 'Ano: 2019', 'Páginas: 320']},
+            {id: 5,name: 'Suspense',image: "assets/images/suspense.jpg",details: ['Suspense - Autor E', 'Ano: 2023', 'Páginas: 390']}], 
+            cart,
+            addToCart,
+            changeImage
+
+          }
+        }
+      }).mount('#app')
+  </script>
+    
 </body>
 </html>
