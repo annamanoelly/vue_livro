@@ -4,49 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VUE3</title>
-    <!--VUE CDN-->
+    <title>Killua Books</title>
+    <link rel="website icon" type="png"
+    href="https://cdn-icons-png.flaticon.com/128/3389/3389081.png">
+  
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <!--STYLE-->
     <link rel="stylesheet" href="assets/styles.css">
+    
 </head>
 <body>
-  
-  <div id="app">
-      <div class="cart">Cart:{{cart}}</div>
-        <div class="produc  t-display">
-          <div class="product-container">
-                <div class="product-image">
-                  <img :src="image" alt="img-product"> 
-                </div>   
-                    <div class="product-info">
-                      <h1>{{product_title}}</h1>
-                        <p v-if="inStock > 10">In Stock</p>
-                        <p v-else-if="inStock < 10 && inStock > 1">Almost of out</p>
-                        <p v-else>Out of Stock</p>
-                      <ul>
-                        <li v-for="detail in details">
-                          {{detail}}
-                        </li>
-                      </ul>
-                      <button v-for="variant in variants" :key="variant.id" 
-                      @mouseover="changeImage(variant.image)"
-                      @click="selectVariant(variant)" 
-                      class="variant-button"> {{variant.name}}
-                      </button>
-                      <button class="button" :class="{disabledButton : inStock < 1}" @click="addToCart" :disabled="inStock < 1">Add to Cart</button>
-                    </div>
-          </div>       
-        </div>
-      </div>
-  </div>
-  
-    <footer>
-      <span>
-        &copy:Killua Books, 2025 - Todos os direitos reservados.
-      </span>
-    </footer>
+   <div id="app">
+    <header>
+      <div class="cart">🛒 {{ cart }}</div>
+    </header>
 
+    <main>
+      <section class="product-display">
+        <div class="product-container">
+          <div class="product-image">
+            <img :src="image" alt="img-product">
+          </div>
+          <div class="product-info">
+            <h1>{{ product_title }}</h1>
+            <p v-if="inStock > 10">In Stock</p>
+            <p v-else-if="inStock < 10 && inStock > 1">Almost out</p>
+            <p v-else>Out of Stock</p>
+            <ul>
+              <li v-for="detail in details">
+                {{ detail }}
+              </li>
+            </ul>
+            <button v-for="variant in variants" :key="variant.id"
+              @mouseover="changeImage(variant.image)"
+              @click="selectVariant(variant)"
+              class="variant-button">
+              {{ variant.name }}
+            </button>
+            <button class="button" :class="{disabledButton : inStock < 1}" @click="addToCart" :disabled="inStock < 1">
+              Adicionar no carrinho
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <span>
+      &copy; Killua Books, 2025 - Todos os direitos reservados.
+    </span>
+  </footer>
+  
+ 
   <script>
     const { createApp, ref } = Vue
       
