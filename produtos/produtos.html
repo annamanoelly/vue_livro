@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="produto.css">
+    <script src="https://kit.fontawesome.com/527f090d2a.js" crossorigin="anonymous"></script>
+    <link rel="website icon" type="png"
+    href="https://cdn-icons-png.flaticon.com/128/3389/3389081.png">
+    <title>Killua Books</title>
+</head>
+<body>
+    <header>
+        <h1>Seja bem-vindo</h1>
+        <div class="menu">
+            <button class="toggle" onclick="toggleMenu()">☰</button>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="">Produtos</a></li>
+                    <li><a href="#">Sobre</a></li>
+                    <li><a href="#">Serviços</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <footer>
+        <span>
+            &copy; Killua Books, 2025 - Todos os direitos reservados.
+        </span>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('show');
+        }
+    </script>
+
+    
+</body>
+</html>
