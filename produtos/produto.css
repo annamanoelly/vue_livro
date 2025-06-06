@@ -1,8 +1,10 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
   background-color:#b8b8d2 ;
-    /* Altere as cores conforme necessário */
-  margin: 0;
-  padding: 0%;
 }
 
 header {
@@ -65,6 +67,59 @@ nav ul li a:hover {
   color: white;
   cursor: pointer;
 }
+
+.main__filme{
+    width: 100%;
+    object-fit: contain;
+    max-height: 100px;
+    margin-right: 20px;
+    transform:  450ms;
+}
+
+.main__filmes{
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding: 20px;
+}
+
+.main__poster:hover{
+    transform: scale(1.08);
+}
+
+.main__filmeLarge{
+    max-height: 250px;
+}
+
+.main__filmeLarge:hover{
+    transform: scale(1.09);
+}
+
+.main__filmes{
+    margin-left: 10px;
+    font-size: 15px;
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+.main__filmes::-webkit-scrollbar{ 
+    display: none; /*tira a barrinha de rolagem*/
+
+}
+
+.livro {
+    display: inline-block;
+    text-align: center;
+    margin: 10px;
+}
+
+.livro p {
+    margin-top: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
 
 /* Footer */
 footer {

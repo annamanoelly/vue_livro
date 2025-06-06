@@ -1,9 +1,11 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
 
 body {
   background-color:#b8b8d2 ;
-    /* Altere as cores conforme necessário */
-  margin: 0;
-  padding: 0%;
 }
 
 header {
