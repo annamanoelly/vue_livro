@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Killua Books</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Killua Books</h1>
+      <div class="cart">🛒 {{ cart }}</div>
+    </header>
+
+    <main class="detalhe-container">
+      <div class="livro-img">
+        <img :src="image" alt="Capa do livro" />
+      </div>
+
+      <div class="livro-info">
+        <h2>{{ selectedVariant.name }} Inesquecível</h2>
+        <p class="autor">{{ selectedVariant.details[0] }}</p>
+
+        <div class="preco">
+            <span class="preco-atual">R$ {{ precoCapa.toFixed(2).replace('.', ',') }}</span>
+        </div>
+
+
+        <ul>
+          <li v-for="detail in selectedVariant.details.slice(1)" :key="detail">{{ detail }}</li>
+        </ul>
+
+        <div class="variacoes">
+          <p><strong>Tipo de Capa:</strong></p>
+          <label><input type="radio" name="capa" value="brochura" v-model="capaSelecionada"> Brochura</label><br />
+          <label><input type="radio" name="capa" value="dura" v-model="capaSelecionada"> Capa Dura (+R$ 10,00)</label><br />
+          <label><input type="radio" name="capa" value="digital" v-model="capaSelecionada"> Kindle</label>
+        </div>
+
+        <div class="variacoes" style="margin-top: 20px;">
+          <p><strong>Outras versões:</strong></p>
+          <button
+            v-for="variant in variants"
+            :key="variant.id"
+            @click="selectVariant(variant)"
+            class="variant-button"
+          >
+            {{ variant.name }}
+          </button>
+        </div>
+
+        <button class="comprar" @click="addToCart">Adicionar ao Carrinho</button>
+      </div>
+    </main>
+
+    <footer>
+      <span>&copy; Killua Books, 2025 - Todos os direitos reservados.</span>
+    </footer>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+      setup() {
+        const cart = ref(0);
+        const capaSelecionada = ref("brochura");
+
+        const precoBase = 55.90;
+
+        const precoCapa = Vue.computed(() => {
+            let base = selectedVariant.value.precoBase;
+
+            if (capaSelecionada.value === 'dura') {
+            return base + 10.00;
+            }
+            if (capaSelecionada.value === 'digital'){
+                return base - 20.00;
+            }
+
+            return base;
+        });
+
+
+        Vue.watch(capaSelecionada, () => {
+            atualizarImagemPorCapa();
+        });
+
+
+        const variants = [
+            {
+                id: 1,
+                name: 'Romance',
+                image: "assets/images/romance.jpg",
+                precoBase: 34.90,
+                details: ['por Jane Austen ', 'Ano da publicação: 2018', 'Páginas: 424']
+            },
+            {
+                id: 2,
+                name: 'Fantasia',
+                image: "assets/images/fantasia.jpg",
+                precoBase: 20.90,
+                details: ['por Antonie de Saint-Exupéry', 'Ano da publicação: 2018', 'Páginas: 96']
+            },
+            {
+                id: 3,
+                name: 'Teologia',
+                image: "assets/images/teologia.jpg",
+                precoBase: 29.90,
+                details: ['por Jonh Bunyan', 'Ano da publicação: 2022', 'Páginas: 128']
+            },
+            {
+                id: 4,
+                name: 'Educativo',
+                image: "assets/images/educativo.jpg",
+                precoBase: 245.00,
+                details: ['por Andrew Tanenbaum', 'Ano da publicação: 2021', 'Páginas: 624']
+            },
+            {
+                id: 5,
+                name: 'Suspense',
+                image: "assets/images/suspense.jpg",
+                precoBase: 20.90,
+                details: ['por Charlie Donlea', 'Ano da publicação: 2017', 'Páginas: 296']
+            }
+        ];
+
+        const selectedVariant = ref(variants[0]);
+        const image = ref(selectedVariant.value.image);
+
+        const selectVariant = (variant) => {
+            selectedVariant.value = variant;
+            atualizarImagemPorCapa(); // usa a capa selecionada atual
+        };
+
+
+        const atualizarImagemPorCapa = () => {
+        const baseImage = selectedVariant.value.image;
+
+            if (capaSelecionada.value === 'dura') {
+            image.value = baseImage.replace('.jpg', '-dura.jpg');
+            } else if (capaSelecionada.value === 'digital') {
+            image.value = baseImage.replace('.jpg', '-digital.jpg');
+            } else {
+            image.value = baseImage;
+            }
+        };
+
+
+        const addToCart = () => {
+          cart.value++;
+        };
+
+        
+        return {
+            cart,
+            image,
+            variants,
+            selectedVariant,
+            selectVariant,
+            addToCart,
+            capaSelecionada,
+            precoCapa
+        };
+
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
