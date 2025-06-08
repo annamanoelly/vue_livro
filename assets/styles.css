@@ -1,26 +1,37 @@
-/* Geral */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: #b8b8d2;
   margin: 0;
-  font-family: Georgia, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   color: #030303;
 }
 
-/* Header */
+
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 4rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  width: 100%;
   background-color: #8c89a1;
-  color: white;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   position: relative;
 }
 
-
 header h1 {
-  font-size: 2.5rem;
-  text-shadow: 1px 1px 1px #fff;
+  font-size: 1.9em;
+  font-weight: 200;
+  color: #fff;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
 }
 
 header .cart {
@@ -29,13 +40,11 @@ header .cart {
   background-color: #898eb8;
   border: 1px solid #f1f1f4;
   box-shadow: 2px 15px -12px rgba(0, 0, 0, 0.57);
-  font-size: 1.2rem;
 }
 
-/* Botões */
-.button {
-  background-color: #898eb8;
-  border-radius: 20px;
+
+.comprar {
+  background-color: #5f357daf;
   border: 1px solid #f1f1f4;
   font-size: 18px;
   width: 200px;
@@ -51,8 +60,8 @@ header .cart {
 }
 
 .variant-button {
-  margin: 10px 10px 10px 0;
-  padding: 5px 15px;
+  margin: 10px 15px 10px 0;
+  padding: 10px 15px;
   font-size: 16px;
   background-color: #898eb8;
   color: white;
@@ -70,7 +79,7 @@ header .cart {
   cursor: not-allowed;
 }
 
-/* Imagens */
+
 img {
   max-width: 100%;
   max-height: 450px;
@@ -78,49 +87,39 @@ img {
   border: 2px solid #d8d8d8;
   padding: 10px;
   box-shadow: 2px 15px -12px rgba(0, 0, 0, 0.57);
-  background-color: white;
+  background-color: #898eb8;
 }
 
-/* Layout principal */
 
 main {
-  display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4rem 1rem;
   min-height: 80vh;
 }
 
-.product-display {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
 
-
-.product-container {
+.detalhe-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   background-color: #ffffff;
   border: 5px solid #9ba0d0;
+  gap: 40px;
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  padding: 2rem;
-  max-width: 1000px;
-  width: 100%;
-  margin: 0 auto;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  max-width: 900px;
+  margin-top: 50px;
+  margin-left: 27%;
 }
 
 
-.product-image {
+.livro-img {
   width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.product-info {
+.livro-info {
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -128,7 +127,6 @@ main {
   padding: 1rem 2rem;
 }
 
-/* Tipografia */
 h1 {
   font-size: 2.5rem;
   color: #5f357daf;
@@ -172,12 +170,12 @@ footer {
 
 /* Responsividade */
 @media only screen and (max-width: 768px) {
-  .product-container {
+  .detalhe-container {
     flex-direction: column;
   }
 
-  .product-image,
-  .product-info {
+  .livro-img,
+  .livro-info {
     width: 100%;
   }
 
