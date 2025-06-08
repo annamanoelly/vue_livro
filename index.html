@@ -14,6 +14,7 @@
     <header>
       <h1>Killua Books</h1>
       <div class="cart">🛒 {{ cart }}</div>
+      <a href="./home/home.html" class="voltar-btn">Início</a>
     </header>
 
     <main class="detalhe-container">
@@ -29,6 +30,13 @@
             <span class="preco-atual">R$ {{ precoCapa.toFixed(2).replace('.', ',') }}</span>
         </div>
 
+        <div class="estoque">
+          <p class="em_estoque" v-if="inStock > 10">Em estoque</p>
+          <p class="quase" v-else-if="inStock > 1">Quase acabando</p>
+          <p class="acabou" v-else>Fora de estoque</p>
+        </div>
+
+
 
         <ul>
           <li v-for="detail in selectedVariant.details.slice(1)" :key="detail">{{ detail }}</li>
@@ -36,9 +44,9 @@
 
         <div class="variacoes">
           <p><strong>Tipo de Capa:</strong></p>
-          <label><input type="radio" name="capa" value="brochura" v-model="capaSelecionada"> Brochura</label><br />
-          <label><input type="radio" name="capa" value="dura" v-model="capaSelecionada"> Capa Dura (+R$ 10,00)</label><br />
-          <label><input type="radio" name="capa" value="digital" v-model="capaSelecionada"> Kindle</label>
+          <label><input type="radio" name="capa" value="brochura" v-model="capaSelecionada">📘 Brochura</label><br />
+          <label><input type="radio" name="capa" value="dura" v-model="capaSelecionada">📗 Capa Dura (+R$ 10,00)</label><br />
+          <label><input type="radio" name="capa" value="digital" v-model="capaSelecionada">📱Kindle</label>
         </div>
 
         <div class="variacoes" style="margin-top: 20px;">
@@ -53,7 +61,7 @@
           </button>
         </div>
 
-        <button class="comprar" @click="addToCart">Adicionar ao Carrinho</button>
+        <button class="button" :class="{disabledButton : inStock < 1}" @click="addToCart" :disabled="inStock < 1">Adicionar ao Carrinho</button>
       </div>
     </main>
 
@@ -68,6 +76,14 @@
     createApp({
       setup() {
         const cart = ref(0);
+        const addToCart = () => {
+          if (selectedVariant.value.inStock > 0) {
+          cart.value++;
+          selectedVariant.value.inStock--;
+          }
+        };
+
+
         const capaSelecionada = ref("brochura");
 
         const precoBase = 55.90;
@@ -97,6 +113,7 @@
                 name: 'Romance',
                 image: "assets/images/romance.jpg",
                 precoBase: 34.90,
+                inStock:15,
                 details: ['por Jane Austen ', 'Ano da publicação: 2018', 'Páginas: 424']
             },
             {
@@ -104,6 +121,7 @@
                 name: 'Fantasia',
                 image: "assets/images/fantasia.jpg",
                 precoBase: 20.90,
+                inStock:5,
                 details: ['por Antonie de Saint-Exupéry', 'Ano da publicação: 2018', 'Páginas: 96']
             },
             {
@@ -111,6 +129,7 @@
                 name: 'Teologia',
                 image: "assets/images/teologia.jpg",
                 precoBase: 29.90,
+                inStock:2,
                 details: ['por Jonh Bunyan', 'Ano da publicação: 2022', 'Páginas: 128']
             },
             {
@@ -118,6 +137,7 @@
                 name: 'Educativo',
                 image: "assets/images/educativo.jpg",
                 precoBase: 245.00,
+                inStock:4,
                 details: ['por Andrew Tanenbaum', 'Ano da publicação: 2021', 'Páginas: 624']
             },
             {
@@ -125,12 +145,16 @@
                 name: 'Suspense',
                 image: "assets/images/suspense.jpg",
                 precoBase: 20.90,
+                inStock:10,
                 details: ['por Charlie Donlea', 'Ano da publicação: 2017', 'Páginas: 296']
             }
         ];
 
         const selectedVariant = ref(variants[0]);
         const image = ref(selectedVariant.value.image);
+
+        const inStock = Vue.computed(() => selectedVariant.value.inStock);
+
 
         const selectVariant = (variant) => {
             selectedVariant.value = variant;
@@ -151,10 +175,6 @@
         };
 
 
-        const addToCart = () => {
-          cart.value++;
-        };
-
         
         return {
             cart,
@@ -164,7 +184,8 @@
             selectVariant,
             addToCart,
             capaSelecionada,
-            precoCapa
+            precoCapa,
+            inStock
         };
 
       }

@@ -43,7 +43,7 @@ header .cart {
 }
 
 
-.comprar {
+.button {
   background-color: #5f357daf;
   border: 1px solid #f1f1f4;
   font-size: 18px;
@@ -58,6 +58,21 @@ header .cart {
 .button:hover {
   background-color: #7a7fb0;
 }
+
+.voltar-btn {
+  text-decoration: none;
+  background-color: #7a7fb0;
+  color: white;
+  padding: 6px 12px;
+  border: 1px solid #f1f1f4;
+  border-radius: 15px;
+  font-size: 20px;
+  margin-left: 10px;
+}
+.voltar-btn:hover {
+  background-color: #5f357daf;
+}
+
 
 .variant-button {
   margin: 10px 15px 10px 0;
@@ -134,20 +149,28 @@ h1 {
 }
 
 p, li, label {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   margin-bottom: 0.5rem;
 }
 
+
+
 .preco {
   margin: 1rem 0;
+  color: rebeccapurple;
+  font-size: 1.7rem;
 }
 
-.preco p {
-  font-size: 1.2rem;
+.em_estoque{
+  color: green;
 }
 
-.preco del {
-  color: #888;
+.quase{
+  color: orangered;
+}
+
+.acabou{
+  color: red;
 }
 
 .variacoes {
@@ -159,7 +182,7 @@ label {
   margin-bottom: 10px;
 }
 
-/* Footer */
+
 footer {
   background-color: #5f357daf;
   color: white;
@@ -168,7 +191,7 @@ footer {
   margin-top: 60px;
 }
 
-/* Responsividade */
+
 @media only screen and (max-width: 768px) {
   .detalhe-container {
     flex-direction: column;
