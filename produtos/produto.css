@@ -162,29 +162,34 @@ footer span {
   header {
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    padding: 20px;
   }
 
   header h1 {
     position: static;
     transform: none;
-    text-align: center;
     margin: 10px 0;
   }
 
   .menu {
+    flex-direction: column;
     width: 100%;
-    justify-content: flex-end;
+    align-items: flex-end;
+    margin-left: 0;
   }
 
   .toggle {
     display: block;
+    margin-bottom: 10px;
   }
 
   nav ul {
-    display: none;
     flex-direction: column;
     width: 100%;
-    background-color: #b8b8d2;
+    background-color: #8c89a1;
+    display: none;
+    text-align: right;
   }
 
   nav ul.show {
@@ -202,6 +207,13 @@ footer span {
   }
 
   .livro {
-    width: 80%;
+    width: 100%;
+    max-width: 350px;
+  }
+
+  footer {
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
   }
 }
