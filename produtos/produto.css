@@ -101,7 +101,7 @@ nav ul li a:hover {
 
 .main__filme {
   width: 90%;
-  height: 400px;
+  height: 300px;
   object-fit: contain;
   border: solid #a98fbcaf;
   background-color: #b8b8d2 ;
@@ -143,7 +143,7 @@ nav ul li a:hover {
 
 footer {
   width: 100%;
-  margin-top: 5.1rem;
+  margin-top: 11.1rem;
   background-color: #5f357daf;
   padding: 30px;
   display: flex;
